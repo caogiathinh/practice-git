@@ -97,4 +97,11 @@ git pull                          : lấy dữ liệu từ central về local re
 git push                          : đẩy các commit từ local lên central. 
 ```
 ## VIII. Xử lý xung đột 
-Khi nào xảy ra commit. 
+## IX. Xử lí xung đột trong Git
+- Xảy ra khi nào ? khi hai lập trình viên cùng chỉnh sửa một file. Cả hai đều pull cùng 1 file về. Dev1 chỉnh sửa xong push lên centralRepo sau đó Dev2 chỉnh sửa push code lên sẽ bị conflict.
+- Khi xảy ra conflict cần thống nhất giữa cái hay chỉnh sửa theo cái mới -> sau đó chỉnh lại bằng VIM/Notepad -> add, commit, push lại. 
+- Trước khi chỉnh sửa:
+	![[Pasted image 20250920221046.png]]
+- Sau khi chỉnh sửa: (thống nhất lại nội dung file)
+	![[Pasted image 20250920221202.png]]
+
