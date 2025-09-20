@@ -97,11 +97,26 @@ git pull                          : lấy dữ liệu từ central về local re
 git push                          : đẩy các commit từ local lên central. 
 ```
 ## VIII. Xử lý xung đột 
-## IX. Xử lí xung đột trong Git
 - Xảy ra khi nào ? khi hai lập trình viên cùng chỉnh sửa một file. Cả hai đều pull cùng 1 file về. Dev1 chỉnh sửa xong push lên centralRepo sau đó Dev2 chỉnh sửa push code lên sẽ bị conflict.
 - Khi xảy ra conflict cần thống nhất giữa cái hay chỉnh sửa theo cái mới -> sau đó chỉnh lại bằng VIM/Notepad -> add, commit, push lại. 
 - Trước khi chỉnh sửa:
 	![[Pasted image 20250920221046.png]]
 - Sau khi chỉnh sửa: (thống nhất lại nội dung file)
 	![[Pasted image 20250920221202.png]]
-
+**Xử Lý:** 
+1. **Trao Đổi:**
+    - Xem ai là người sửa code (`git blame <tên file>`).
+    - **Nói chuyện với họ** để thống nhất logic nghiệp vụ cần giữ lại. Đây là bước quan trọng nhất.
+2. **Chọn Giải Pháp & Sửa Code:**
+    - Cập nhật nhánh của bạn:
+        - `git pull origin <nhánh chính>` (ví dụ: `main`). Cách này tạo một "merge commit".
+        - `git pull --rebase origin <nhánh chính>`. Cách này viết lại lịch sử cho thẳng hàng. **Chỉ dùng trên nhánh cá nhân.**
+    - Mở file bị conflict, **xóa các dấu `<<<<<<<`, `=======`, `>>>>>>>`**, và chỉnh sửa code thành phiên bản đúng cuối cùng.
+    - Hoàn tất:
+        - Nếu dùng `pull` (merge): `git add .` rồi `git commit`.
+        - Nếu dùng `pull --rebase`: `git add .` rồi `git rebase --continue`.
+3. **Kiểm Tra Lại:**
+    - Sau khi sửa, hãy **chạy test** để đảm bảo ứng dụng không bị lỗi do việc hợp nhất code.
+**Tips**
+	- **Cập nhật thường xuyên:** `pull` mỗi buổi sáng trước khi bắt đầu code.
+	- **Chia nhỏ công việc:** Giữ cho các nhánh (feature branch) tồn tại ngắn ngày. Merge sớm và liên tục.
